@@ -1,7 +1,9 @@
 import pymongo
 
+# membuat koneksi url mongo
 koneksi_url = "mongodb://localhost:27017/"
 
+# membuat function untuk membuat database dan koleksi baru
 def createDatabase(url_client, database, collection, document):
     myclient = pymongo.MongoClient(url_client)
     mydatabase = myclient[database]
@@ -10,7 +12,7 @@ def createDatabase(url_client, database, collection, document):
 
     return mydocument
 
-
+# membuat class MongoAPI untuk generate api
 class MongoAPI:
     def __init__(self, data, url_client):
         self.client = pymongo.MongoClient(url_client)
@@ -60,13 +62,20 @@ class MongoAPI:
 
 if __name__ == '__main__':
     data = {
-        "database": "DBperusahaan",
-        "collection": "pegawai",
+        # nama database yang akan di sambungkan
+        "database": "DBperusahaan", 
+
+        # nama collection yang akan di sambungkan
+        "collection": "pegawai", 
+
+        # optional untuk update data
         "filter": {
-            'name': "Ahmad Fauzan"
+            'name': "Ahmad Fauzan" 
         },
+
+        # optional untuk update data
         'dataUpdate' : {
-            'name' : "RRQ Lemon"
+            'name' : "RRQ Lemon" 
         }
     }
 
@@ -75,10 +84,11 @@ if __name__ == '__main__':
     # documents = { 'name': 'Ahmad Fauzan' }      
     # buat_db = createDatabase(koneksi_url, namadb, namacol, documents)
 
+    # membuat objek pada class mongoApi
     mongo_objek = MongoAPI(data, koneksi_url)
     mongo_objek.update()
     mongo_objek.create({
         'document': {
-            'name' : 'Faiz'
+            'name' : 'Jongkok'
         }
     })          
